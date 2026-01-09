@@ -41,3 +41,11 @@ def test_praise_negative():
     # expect to throw an error, as negative repetitions throw
     with pytest.raises(ValueError):
         execute_program(instructions, stack, available_instructions)
+
+def test_praise_empty():
+    instructions = [PraiseInstruction.notation]
+    available_instructions = [PraiseInstruction]
+    stack = []
+    # expect to throw an error
+    with pytest.raises(IndexError):
+        execute_program(instructions, stack, available_instructions)
