@@ -42,6 +42,7 @@ def test_praise_negative():
     with pytest.raises(ValueError):
         execute_program(instructions, stack, available_instructions)
 
+
 def test_praise_empty():
     instructions = [PraiseInstruction.notation]
     available_instructions = [PraiseInstruction]

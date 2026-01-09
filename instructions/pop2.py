@@ -1,10 +1,10 @@
 from .base_instruction import BaseInstruction
 
 
-class PopInstruction(BaseInstruction):
-    notation = "pop"
+class Pop2Instruction(BaseInstruction):
+    notation = "pop2"
 
     @staticmethod
     def execute(stack: list[int]):
-        stack.pop()
+        stack.pop(-2)
         return
