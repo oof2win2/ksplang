@@ -1,3 +1,5 @@
+import pytest
+
 from ..execute import execute_program
 from .lroll import LRollInstruction
 
@@ -30,3 +32,11 @@ def test_lroll_third():
     assert (
         execute_program(instructions, stack, available_instructions) == expected_stack
     )
+
+
+def test_lroll_raise():
+    instructions = [LRollInstruction.notation]
+    available_instructions = [LRollInstruction]
+    stack = [0]
+    with pytest.raises(IndexError):
+        execute_program(instructions, stack, available_instructions)
