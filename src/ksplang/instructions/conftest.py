@@ -1,7 +1,7 @@
 import pytest
 
-from ..execute import execute_program
-from .base_instruction import BaseInstruction
+from ksplang.execute import execute_program
+from ksplang.instructions.base_instruction import BaseInstruction
 
 
 def execute_instruction(

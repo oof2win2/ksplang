@@ -1,6 +1,6 @@
 from math import pi
 
-from ..base_instruction import BaseInstruction
+from ksplang.instructions.base_instruction import BaseInstruction
 
 pidigits = "31415926535897932384626433832795028841971693993751"
 

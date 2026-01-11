@@ -1,4 +1,4 @@
-from ..base_instruction import BaseInstruction
+from ksplang.instructions.base_instruction import BaseInstruction
 
 
 class CSInstruction(BaseInstruction):

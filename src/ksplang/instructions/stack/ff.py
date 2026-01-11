@@ -1,5 +1,5 @@
 from ...constants import MAX_STACK_SIZE, MIN_INT
-from ..base_instruction import BaseInstruction
+from ksplang.instructions.base_instruction import BaseInstruction
 
 
 class FFInstruction(BaseInstruction):
