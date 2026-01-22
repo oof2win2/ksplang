@@ -104,3 +104,27 @@ class Executor:
                 raise ValueError(f"Unknown instruction: {instruction}")
             ex.execute(self)
             debug(f"Executed instruction {instruction} with new stack {self.__stack}")
+
+    def step(self):
+        """
+        Takes one step through the program
+        """
+
+        if len(self.__instructions_to_execute) == 0:
+            print("Program finished")
+            return 1
+
+        instruction = self.__instructions_to_execute.pop(0)
+        ex = next(
+            (
+                ins
+                for ins in self.__available_instructions
+                if ins.notation == instruction
+            ),
+            None,
+        )
+        if not ex:
+            raise ValueError(f"Unknown instruction: {instruction}")
+        ex.execute(self)
+        debug(f"Executed instruction {instruction} with new stack {self.__stack}")
+        return 0

@@ -11,8 +11,8 @@ class MedianInstruction(BaseInstruction):
 
     @staticmethod
     def execute(executor: Executor):
-        count = executor.stack_pop()
-        numbers = [executor.stack_pop() for _ in range(count - 1)]
+        count = executor.stack_get(-1)
+        numbers = [executor.stack_get(-2 - i) for i in range(count - 1)]
         numbers.append(count)
 
         # handle the count being one, no need to sort or anything
