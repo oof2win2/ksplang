@@ -1,3 +1,4 @@
+from ksplang.executor import Executor
 from ksplang.instructions.base_instruction import BaseInstruction
 
 
@@ -5,11 +6,11 @@ class LSwapInstruction(BaseInstruction):
     notation = "l-swap"
 
     @staticmethod
-    def execute(stack: list[int]):
-        if len(stack) == 0:
+    def execute(executor: Executor):
+        if executor.stack_len() == 0:
             raise IndexError("Stack is empty")
         # swap the values
-        tmp = stack[0]
-        stack[0] = stack[-1]
-        stack[-1] = tmp
+        tmp = executor.stack_get(0)
+        executor.stack_set(0, executor.stack_get(-1))
+        executor.stack_set(-1, tmp)
         return

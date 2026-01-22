@@ -1,3 +1,4 @@
+from ksplang.executor import Executor
 from ksplang.instructions.base_instruction import BaseInstruction
 
 
@@ -5,12 +6,12 @@ class LRollInstruction(BaseInstruction):
     notation = "lroll"
 
     @staticmethod
-    def execute(stack: list[int]):
-        n = stack.pop()
-        x = stack.pop()
+    def execute(executor: Executor):
+        n = executor.stack_pop()
+        x = executor.stack_pop()
 
         # remove the last n items from the stack and the restore their order as in the stack
-        nextn = [stack.pop() for _ in range(n)]
+        nextn = [executor.stack_pop() for _ in range(n)]
         nextn.reverse()
 
         if x < 0:
@@ -22,5 +23,5 @@ class LRollInstruction(BaseInstruction):
             for _ in range(x):
                 nextn.insert(0, nextn.pop())
 
-        stack.extend(nextn)
+        executor.stack_extend(nextn)
         return
