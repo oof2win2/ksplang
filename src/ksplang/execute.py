@@ -4,6 +4,7 @@ from logging import debug
 from pathlib import Path
 from typing import Sequence
 
+from ksplang.executor import Executor
 from ksplang.instructions.base_instruction import BaseInstruction
 
 
@@ -44,15 +45,8 @@ def execute_program(
     # sequence means all available instructions must extend from BaseInstruction
     available_instructions: Sequence[type[BaseInstruction]],
 ):
-    instructions = init_instructions[::]
-    stack = init_stack[::]
-    for i, instruction in enumerate(instructions):
-        ex = next(
-            (ins for ins in available_instructions if ins.notation == instruction), None
-        )
-        if not ex:
-            raise ValueError(f"Unknown instruction: {instruction}")
-        ex.execute(stack)
-        debug(f"Executed instruction {instruction} on stack {stack}")
-
-    return stack
+    executor = Executor(
+        list(init_instructions), list(init_stack), available_instructions
+    )
+    executor.execute_program()
+    return executor.get_stack()

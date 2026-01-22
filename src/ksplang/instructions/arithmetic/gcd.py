@@ -1,3 +1,4 @@
+from ksplang.executor import Executor
 from ksplang.helpers.gcd import gcd
 from ksplang.instructions.base_instruction import BaseInstruction
 
@@ -6,10 +7,10 @@ class GCDInstruction(BaseInstruction):
     notation = "gcd"
 
     @staticmethod
-    def execute(stack: list[int]):
-        first = stack.pop()
-        second = stack.pop()
+    def execute(executor: Executor):
+        first = executor.stack_pop()
+        second = executor.stack_pop()
 
-        stack.append(gcd(first, second))
+        executor.stack_push(gcd(first, second))
 
         return

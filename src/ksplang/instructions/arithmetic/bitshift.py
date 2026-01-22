@@ -1,3 +1,4 @@
+from ksplang.executor import Executor
 from ksplang.helpers.int64 import to_int64
 from ksplang.instructions.base_instruction import BaseInstruction
 
@@ -21,12 +22,12 @@ class BitshiftInstruction(BaseInstruction):
     notation = "bitshift"
 
     @staticmethod
-    def execute(stack: list[int]):
-        numshifts = stack.pop()
+    def execute(executor: Executor):
+        numshifts = executor.stack_pop()
         if numshifts < 0:
             raise ValueError("[bitshift] Number of bits to shift must be non-negative")
-        num = stack.pop()
+        num = executor.stack_pop()
         result = bitshift(num, numshifts)
-        stack.append(result)
+        executor.stack_push(result)
 
         return

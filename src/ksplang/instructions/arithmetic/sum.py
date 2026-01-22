@@ -1,3 +1,4 @@
+from ksplang.executor import Executor
 from ksplang.helpers.int64 import is_int64
 from ksplang.instructions.base_instruction import BaseInstruction
 
@@ -6,13 +7,13 @@ class SumInstruction(BaseInstruction):
     notation = "sum"
 
     @staticmethod
-    def execute(stack: list[int]):
+    def execute(executor: Executor):
         total = 0
-        while stack:
-            total += stack.pop()
+        while executor.stack_len() > 0:
+            total += executor.stack_pop()
         if not is_int64(total):
             raise ValueError("[sum] instruction result is not a valid int64")
 
-        stack.append(total)
+        executor.stack_push(total)
 
         return

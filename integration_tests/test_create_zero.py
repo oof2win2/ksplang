@@ -1,4 +1,5 @@
-from ksplang.execute import discover_instructions, execute_program
+from ksplang.execute import discover_instructions
+from ksplang.executor import Executor
 
 available_instructions = discover_instructions()
 
@@ -11,13 +12,14 @@ def test_create_zero_one():
     endstack = startstack[::]
     endstack.append(0)
 
-    result = execute_program(
+    executor = Executor(
         "CS CS CS ++ CS CS % pop2 pop2 pop2".split(" "),
         startstack,
         available_instructions,
     )
+    executor.execute_program()
     # there should be a zero at the end
-    assert result == endstack
+    assert endstack == executor.get_stack()
 
 
 def test_create_zero_two():
@@ -25,8 +27,62 @@ def test_create_zero_two():
     endstack = startstack[::]
     endstack.append(0)
 
-    result = execute_program(
+    executor = Executor(
+        "CS CS CS CS funkcia pop2 pop2".split(" "),
+        startstack,
+        available_instructions,
+    )
+    executor.execute_program()
+    # there should be a zero at the end
+    assert endstack == executor.get_stack()
+
+
+def test_create_zero_three():
+    startstack = [x for x in range(10)]
+    endstack = startstack[::]
+    endstack.append(0)
+
+    executor = Executor(
         "CS CS lensum ++ CS %".split(" "), startstack, available_instructions
     )
+    executor.execute_program()
+    result = executor.get_stack()
+
+    # there should be a zero at the end
+    assert endstack == result
+
+
+def test_create_zero_four():
+    startstack = [x for x in range(10)]
+    endstack = startstack[::]
+    endstack.append(0)
+
+    executor = Executor(
+        "CS CS lensum CS funkcia".split(" "), startstack, available_instructions
+    )
+    executor.execute_program()
+    result = executor.get_stack()
+
+    # there should be a zero at the end
+    assert endstack == result
+
+
+def test_create_zero_five():
+    startstack = [x for x in range(10)]
+    endstack = startstack[::]
+    endstack.append(0)
+
+    instructions = "CS CS ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ ++ bitshift".split(
+        " "
+    )
+
+    executor = Executor(
+        instructions,
+        startstack,
+        available_instructions,
+    )
+    executor.execute_program()
+    result = executor.get_stack()
+
     # there should be a zero at the end
     assert endstack == result

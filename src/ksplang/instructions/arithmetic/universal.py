@@ -1,5 +1,6 @@
 import math
 
+from ksplang.executor import Executor
 from ksplang.instructions.base_instruction import BaseInstruction
 
 
@@ -7,47 +8,47 @@ class UniversalMathInstruction(BaseInstruction):
     notation = "u"
 
     @staticmethod
-    def execute(stack: list[int]):
-        id = stack.pop()
+    def execute(executor: Executor):
+        id = executor.stack_pop()
 
         if id == 0:
-            stack.append(stack.pop() + stack.pop())
+            executor.stack_push(executor.stack_pop() + executor.stack_pop())
             return
 
         if id == 1:
-            first = stack.pop()
-            second = stack.pop()
-            stack.append(abs(first - second))
+            first = executor.stack_pop()
+            second = executor.stack_pop()
+            executor.stack_push(abs(first - second))
             return
 
         if id == 2:
-            stack.append(stack.pop() * stack.pop())
+            executor.stack_push(executor.stack_pop() * executor.stack_pop())
             return
 
         if id == 3:
-            first = stack.pop()
-            second = stack.pop()
+            first = executor.stack_pop()
+            second = executor.stack_pop()
             # must behave like C modulo
             rem = int(math.fmod(first, second))
 
             if rem == 0:
-                stack.append(int(first / second))
+                executor.stack_push(int(first / second))
             else:
-                stack.append(rem)
+                executor.stack_push(rem)
             return
 
         if id == 4:
-            stack.append(math.factorial(stack.pop()))
+            executor.stack_push(math.factorial(executor.stack_pop()))
             return
 
         if id == 5:
-            next = stack.pop()
+            next = executor.stack_pop()
             if next < 0:
-                stack.append(-1)
+                executor.stack_push(-1)
             elif next == 0:
-                stack.append(0)
+                executor.stack_push(0)
             else:
-                stack.append(1)
+                executor.stack_push(1)
             return
 
         raise ValueError(f"[u]: Unsupported operand ID {id}")

@@ -6,13 +6,13 @@ from ksplang.instructions.base_instruction import BaseInstruction
 
 
 class Executor:
-    __instructions_to_execute: list[str]
+    __instructions_to_execute: Sequence[str]
     __stack: list[int]
     __available_instructions: Sequence[type[BaseInstruction]]
 
     def __init__(
         self,
-        init_instructions: list[str],
+        init_instructions: Sequence[str],
         init_stack: list[int],
         available_instructions: Sequence[type[BaseInstruction]],
     ):

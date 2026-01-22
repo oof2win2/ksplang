@@ -1,3 +1,4 @@
+from ksplang.executor import Executor
 from ksplang.instructions.base_instruction import BaseInstruction
 
 
@@ -18,9 +19,9 @@ class FunkciaInstruction(BaseInstruction):
     notation = "funkcia"
 
     @staticmethod
-    def execute(stack: list[int]):
-        first = stack.pop()
-        second = stack.pop()
+    def execute(executor: Executor):
+        first = executor.stack_pop()
+        second = executor.stack_pop()
 
         ff = {}
         fs = {}
@@ -42,12 +43,12 @@ class FunkciaInstruction(BaseInstruction):
             if not (k in fs and k in ff)
         }
         if len(result) == 0:
-            stack.append(0)
+            executor.stack_push(0)
             return
 
         total = 1
         for factor, count in result.items():
             total *= factor**count
-        stack.append(total % 1_000_000_007)
+        executor.stack_push(total % 1_000_000_007)
 
         return

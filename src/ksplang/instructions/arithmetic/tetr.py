@@ -1,15 +1,17 @@
-from ...helpers.tetr import tetr
+from ksplang.executor import Executor
 from ksplang.instructions.base_instruction import BaseInstruction
+
+from ...helpers.tetr import tetr
 
 
 class TetrationInstruction(BaseInstruction):
     notation = "tetr"
 
     @staticmethod
-    def execute(stack: list[int]):
-        number = stack.pop()
-        repetitions = stack.pop()
+    def execute(executor: Executor):
+        number = executor.stack_pop()
+        repetitions = executor.stack_pop()
 
-        stack.append(tetr(number, repetitions))
+        executor.stack_push(tetr(number, repetitions))
 
         return
