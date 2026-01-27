@@ -1,7 +1,6 @@
 from math import sqrt
 
 from ksplang.executor import Executor
-from ksplang.helpers.gcd import gcd
 from ksplang.instructions.base_instruction import BaseInstruction
 
 
@@ -28,9 +27,22 @@ class QuadraticSolutionInstruction(BaseInstruction):
                 executor.stack_push(int(sol))
             return
 
+        discriminant = b**2 - 4 * a * c
+        if discriminant < 0:
+            # no real solutions
+            return
+        discrim_sqrt = sqrt(discriminant)
+
+        if discriminant == 0:
+            # one real solution
+            sol = -b / (2 * a)
+            if sol.is_integer():
+                executor.stack_push(int(sol))
+            return
+
         sols = [
-            (-b + sqrt(b**2 - 4 * a * c)) / (2 * a),
-            (-b - sqrt(b**2 - 4 * a * c)) / (2 * a),
+            (-b + discrim_sqrt) / (2 * a),
+            (-b - discrim_sqrt) / (2 * a),
         ]
         sols.sort()
         # if only one root, remove the duplicate
