@@ -9,6 +9,9 @@ class Executor:
     __instructions_to_execute: Sequence[str]
     __stack: list[int]
     __available_instructions: Sequence[type[BaseInstruction]]
+    __instruction_pointer: int
+    __execution_direction: int
+    __count_executed_instructions: int
 
     def __init__(
         self,
@@ -16,9 +19,12 @@ class Executor:
         init_stack: list[int],
         available_instructions: Sequence[type[BaseInstruction]],
     ):
-        self.__instructions_to_execute = init_instructions
+        self.__instructions_to_execute = [x.lower() for x in init_instructions]
         self.__stack = init_stack
         self.__available_instructions = available_instructions
+        self.__instruction_pointer = 0
+        self.__execution_direction = 1
+        self.__count_executed_instructions = 0
 
     def stack_len(self) -> int:
         return len(self.__stack)
@@ -86,17 +92,54 @@ class Executor:
         """
         return self.__stack.copy()
 
+    def get_instruction_pointer(self) -> int:
+        """
+        Returns the current instruction pointer.
+        """
+        return self.__instruction_pointer
+
+    def set_instruction_pointer(self, value: int) -> None:
+        """
+        Sets the current instruction pointer.
+        """
+        self.__instruction_pointer = value
+
+    def get_execution_direction(self) -> int:
+        """
+        Returns the current execution direction.
+        """
+        return self.__execution_direction
+
+    def set_execution_direction(self, value: int) -> None:
+        """
+        Sets the current execution direction.
+        """
+        self.__execution_direction = value
+
+    def get_program_size(self) -> int:
+        """
+        Returns the size of the program.
+        """
+        return len(self.__instructions_to_execute)
+
+    def get_executed_instructions_count(self) -> int:
+        """
+        Returns the number of instructions executed.
+        """
+        return self.__count_executed_instructions
+
     def execute_program(self):
         """
         Executes the program.
         """
 
-        for i, instruction in enumerate(self.__instructions_to_execute):
+        while self.__instruction_pointer < len(self.__instructions_to_execute):
+            instruction = self.__instructions_to_execute[self.__instruction_pointer]
             ex = next(
                 (
                     ins
                     for ins in self.__available_instructions
-                    if ins.notation == instruction
+                    if ins.notation.lower() == instruction
                 ),
                 None,
             )
@@ -104,22 +147,23 @@ class Executor:
                 raise ValueError(f"Unknown instruction: {instruction}")
             ex.execute(self)
             debug(f"Executed instruction {instruction} with new stack {self.__stack}")
+            self.__instruction_pointer += 1 * self.__execution_direction
+            self.__count_executed_instructions += 1
 
     def step(self):
         """
-        Takes one step through the program
+        Executes one instruction.
         """
 
-        if len(self.__instructions_to_execute) == 0:
-            print("Program finished")
+        if self.__instruction_pointer >= len(self.__instructions_to_execute):
             return 1
 
-        instruction = self.__instructions_to_execute.pop(0)
+        instruction = self.__instructions_to_execute[self.__instruction_pointer]
         ex = next(
             (
                 ins
                 for ins in self.__available_instructions
-                if ins.notation == instruction
+                if ins.notation.lower() == instruction
             ),
             None,
         )
@@ -127,4 +171,6 @@ class Executor:
             raise ValueError(f"Unknown instruction: {instruction}")
         ex.execute(self)
         debug(f"Executed instruction {instruction} with new stack {self.__stack}")
+        self.__instruction_pointer += 1 * self.__execution_direction
+        self.__count_executed_instructions += 1
         return 0
