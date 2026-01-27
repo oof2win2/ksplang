@@ -60,3 +60,27 @@ def test_brz_infinite_loop(execute_multiple_instructions):
     assert ex.get_instruction_pointer() == 0
     # the number of executed instructions should be 4
     assert ex.get_executed_instructions_count() == numsteps
+
+
+def test_brz_low(execute_multiple_instructions):
+    ex = Executor(
+        [
+            BrzInstruction.notation,
+        ],
+        [-1, 0],
+        [BrzInstruction],
+    )
+    with pytest.raises(ValueError):
+        ex.execute_program()
+
+
+def test_brz_high(execute_multiple_instructions):
+    ex = Executor(
+        [
+            BrzInstruction.notation,
+        ],
+        [1, 0],
+        [BrzInstruction],
+    )
+    with pytest.raises(ValueError):
+        ex.execute_program()
