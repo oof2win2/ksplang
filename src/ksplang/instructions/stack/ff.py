@@ -12,7 +12,6 @@ class FFInstruction(BaseInstruction):
         first = executor.stack_pop()
         second = executor.stack_pop()
 
-        print(first, second)
         if first == 2 and second == 4:
             return
 

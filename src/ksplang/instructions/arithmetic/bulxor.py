@@ -13,7 +13,6 @@ class BulxorInstruction(BaseInstruction):
         for i in range(0, len(numbers), 2):
             first = 1 if numbers[i] > 0 else 0
             second = 1 if numbers[i + 1] > 0 else 0
-            print(first, second, first ^ second)
             toadd.append(first ^ second)
         toadd.reverse()
         executor.stack_extend(toadd)

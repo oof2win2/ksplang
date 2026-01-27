@@ -18,7 +18,6 @@ class LRollInstruction(BaseInstruction):
             # x is negative, so we multiply by -1 for range to work as intended
             for _ in range(x * -1):
                 nextn.append(nextn.pop(0))
-                print(nextn)
         else:
             for _ in range(x):
                 nextn.insert(0, nextn.pop())

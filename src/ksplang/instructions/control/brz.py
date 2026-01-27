@@ -15,6 +15,5 @@ class BrzInstruction(BaseInstruction):
 
         # the Executor will auto-increment the IP after executing the instruction
         executor.set_instruction_pointer(address - 1)
-        print(f"Setting IP to {address}")
 
         return
