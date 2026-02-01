@@ -8,17 +8,6 @@ class ReverseInstruction(BaseInstruction):
 
     @staticmethod
     def execute(executor: Executor):
-        revstack = executor.peek_rev_stack()
-        if revstack and revstack["origin_ip"] == executor.get_instruction_pointer():
-            executor.pop_rev_stack()  # close the block
-            # reverse stack
-            executor.stack_reverse()
-            # reverse the execution direction
-            executor.set_execution_direction(executor.get_execution_direction() * -1)
-            # set the IP to the return IP
-            executor.set_instruction_pointer(revstack["return_ip"] - 1)
-            return
-
         a = executor.stack_pop()
         b = executor.stack_pop()
 
@@ -41,12 +30,19 @@ class ReverseInstruction(BaseInstruction):
                 offset = max(sols[0], sols[1])
 
         current_ip = executor.get_instruction_pointer()
-        target_ip = current_ip + offset
-        return_ip = current_ip + offset + 1
+        # subtract if reversed
+        return_ip = current_ip + (offset + 1) * executor.get_execution_direction()
+        new_ip = current_ip + (offset + 1) * executor.get_execution_direction()
 
-        executor.set_instruction_pointer(target_ip + 1)
-        executor.set_execution_direction(-1)
-        executor.append_rev_stack({"origin_ip": current_ip, "return_ip": return_ip})
+        if return_ip < 0:
+            raise ValueError("[rev]: Return IP must be non-negative")
+        if return_ip > executor.get_program_size():
+            raise ValueError("[rev]: Return IP must be within the program")
+
+        executor.append_rev_stack((current_ip, return_ip))
+
+        executor.set_instruction_pointer(new_ip)
+        executor.set_execution_direction(executor.get_execution_direction() * -1)
 
         executor.stack_reverse()
 

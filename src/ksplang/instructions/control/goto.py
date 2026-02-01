@@ -16,8 +16,5 @@ class GotoInstruction(BaseInstruction):
 
         # the Executor will auto-increment the IP after executing the instruction
         executor.set_instruction_pointer(ip - 1 * executor.get_execution_direction())
-        print(
-            f"{ip}, {executor.get_instruction_pointer()}, {executor.get_execution_direction()}"
-        )
 
         return

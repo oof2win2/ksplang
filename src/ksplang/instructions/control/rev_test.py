@@ -103,4 +103,4 @@ def test_rev_nested_one(execute_multiple_instructions):
             PopInstruction.notation,
             NopInstruction.notation,
         ],
-    ) == [12, 11, 10]
+    ) == [10, 11, 12]

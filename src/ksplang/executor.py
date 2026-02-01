@@ -12,7 +12,7 @@ class Executor:
     __instruction_pointer: int
     __execution_direction: int
     __count_executed_instructions: int
-    __rev_stack: list[dict[str, int]]
+    __rev_stack: list[tuple[int, int]]
 
     def __init__(
         self,
@@ -144,19 +144,19 @@ class Executor:
         """
         return self.__count_executed_instructions
 
-    def peek_rev_stack(self) -> dict[str, int] | None:
+    def peek_rev_stack(self) -> tuple[int, int] | None:
         """
         Returns the rev stack.
         """
         return self.__rev_stack[-1] if len(self.__rev_stack) > 0 else None
 
-    def append_rev_stack(self, rev: dict[str, int]):
+    def append_rev_stack(self, rev: tuple[int, int]):
         """
         Appends a rev to the rev stack.
         """
         self.__rev_stack.append(rev)
 
-    def pop_rev_stack(self) -> dict[str, int]:
+    def pop_rev_stack(self) -> tuple[int, int]:
         """
         Pops a rev from the rev stack.
         """
@@ -167,11 +167,26 @@ class Executor:
         Executes the program.
         """
 
-        while (
-            self.__instruction_pointer < len(self.__instructions_to_execute)
-            and self.__instruction_pointer > -1
-        ):
+        while True:
+            if self.__instruction_pointer >= len(self.__instructions_to_execute):
+                break
+            if self.__instruction_pointer == -1:
+                break
+            lastrev = self.peek_rev_stack()
+            if lastrev and lastrev[0] == self.__instruction_pointer:
+                # reverse stack
+                self.stack_reverse()
+                # reverse the execution direction
+                self.set_execution_direction(self.get_execution_direction() * -1)
+                # set the IP to the return IP
+                self.set_instruction_pointer(self.__rev_stack[-1][1])
+                self.__rev_stack.pop()  # close the block
+                continue
+
             instruction = self.__instructions_to_execute[self.__instruction_pointer]
+            # print(
+            #     f"Executing IP={self.__instruction_pointer}, instruction={instruction}, stack={self.__stack}"
+            # )
             ex = next(
                 (
                     ins
@@ -196,8 +211,20 @@ class Executor:
             return 1
         if self.__instruction_pointer == -1:
             return 1
+        lastrev = self.peek_rev_stack()
+        if lastrev and lastrev[0] == self.__instruction_pointer:
+            # reverse stack
+            self.stack_reverse()
+            # reverse the execution direction
+            self.set_execution_direction(self.get_execution_direction() * -1)
+            # set the IP to the return IP
+            self.set_instruction_pointer(self.__rev_stack[-1][1])
+            self.__rev_stack.pop()  # close the block
 
         instruction = self.__instructions_to_execute[self.__instruction_pointer]
+        # print(
+        #     f"Executing IP={self.__instruction_pointer}, instruction={instruction}, stack={self.__stack}"
+        # )
         ex = next(
             (
                 ins

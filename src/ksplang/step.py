@@ -1,8 +1,8 @@
 from ksplang.execute import discover_instructions
 from ksplang.executor import Executor
 
-instructions = "nop rev goto nop nop".split(" ")
-exec = Executor(instructions, [0, 1, 2, 3, 2, 0], discover_instructions())
+instructions = "rev ++ pop pop".split(" ")
+exec = Executor(instructions, [1, 2, 3, 4, 2, 0], discover_instructions())
 
 retval = 0
 while retval == 0:
