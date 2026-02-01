@@ -8,4 +8,4 @@ class SpanekInstruction(BaseInstruction):
 
     @staticmethod
     def execute(executor: Executor):
-        return
+        raise TimeoutError("Timed out")

@@ -39,6 +39,14 @@ def discover_instructions() -> Sequence[type[BaseInstruction]]:
     return instructions
 
 
+def operator_by_id(id: int) -> type[BaseInstruction]:
+    instructions = discover_instructions()
+    for instruction in instructions:
+        if instruction.id == id:
+            return instruction
+    raise ValueError("[operator_by_id]: Instruction ID not found")
+
+
 def instruction_notation_to_ids(labels: Sequence[str]) -> Sequence[int]:
     ids = []
     instructions = discover_instructions()

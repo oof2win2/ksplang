@@ -164,6 +164,12 @@ class Executor:
         """
         return self.__rev_stack.pop()
 
+    def add_instruction(self, instruction_id: int):
+        """
+        Adds an instruction to the executor.
+        """
+        self.__instructions_to_execute.append(instruction_id)
+
     def execute_program(self):
         """
         Executes the program.
