@@ -7,7 +7,7 @@ class JumpInstruction(BaseInstruction):
 
     @staticmethod
     def execute(executor: Executor):
-        address = executor.stack_get(-1)
+        address = executor.stack_peek()
         direction = executor.get_execution_direction()
         current = executor.get_instruction_pointer()
 

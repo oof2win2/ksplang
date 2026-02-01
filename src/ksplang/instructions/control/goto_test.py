@@ -19,7 +19,7 @@ def test_goto_set_ip(execute_multiple_instructions):
     ex.execute_program()
     # the stack should have only one PlusPlus executed on it
     # 2 should be popped (IP) and increment the other 2 => 3
-    assert ex.get_stack() == [3]
+    assert ex.get_stack() == [2, 3]
     # the IP should be set to 3, the last ++ instruction
     assert ex.get_instruction_pointer() == 3
     # the number of executed instructions should be 2
