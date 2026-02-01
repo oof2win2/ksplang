@@ -5,6 +5,7 @@ from ...helpers.tetr import tetr
 
 
 class TetrationInstruction(BaseInstruction):
+    id = 13
     notation = "tetr"
 
     @staticmethod

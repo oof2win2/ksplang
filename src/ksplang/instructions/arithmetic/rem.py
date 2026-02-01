@@ -5,6 +5,7 @@ from ksplang.instructions.base_instruction import BaseInstruction
 
 
 class RemInstruction(BaseInstruction):
+    id = 11
     notation = "REM"
 
     @staticmethod

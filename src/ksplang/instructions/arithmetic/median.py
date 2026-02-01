@@ -7,6 +7,7 @@ from ...helpers.mergesort import mergesort
 
 
 class MedianInstruction(BaseInstruction):
+    id = 15
     notation = "m"
 
     @staticmethod

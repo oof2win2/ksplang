@@ -3,6 +3,7 @@ from ksplang.instructions.base_instruction import BaseInstruction
 
 
 class LRollInstruction(BaseInstruction):
+    id = 5
     notation = "lroll"
 
     @staticmethod

@@ -16,6 +16,7 @@ def get_prime_factors(n: int) -> list[int]:
 
 
 class FunkciaInstruction(BaseInstruction):
+    id = 24
     notation = "funkcia"
 
     @staticmethod

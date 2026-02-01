@@ -3,6 +3,7 @@ from ksplang.instructions.base_instruction import BaseInstruction
 
 
 class GotoInstruction(BaseInstruction):
+    id = 28
     notation = "goto"
 
     @staticmethod

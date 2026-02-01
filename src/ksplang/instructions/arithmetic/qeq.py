@@ -6,6 +6,7 @@ from ksplang.instructions.base_instruction import BaseInstruction
 
 
 class QuadraticSolutionInstruction(BaseInstruction):
+    id = 23
     notation = "qeq"
 
     @staticmethod

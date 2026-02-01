@@ -3,6 +3,7 @@ from ksplang.instructions.base_instruction import BaseInstruction
 
 
 class SwapInstruction(BaseInstruction):
+    id = 7
     notation = "swap"
 
     @staticmethod

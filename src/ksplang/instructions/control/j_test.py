@@ -11,9 +11,9 @@ def test_jump_skip_one(execute_multiple_instructions):
         [JumpInstruction, PlusPlusInstruction],
         [1],
         [
-            JumpInstruction.notation,
-            PlusPlusInstruction.notation,
-            PlusPlusInstruction.notation,
+            JumpInstruction.id,
+            PlusPlusInstruction.id,
+            PlusPlusInstruction.id,
         ],
     ) == [2]
 
@@ -24,9 +24,9 @@ def test_jump_skip_two(execute_multiple_instructions):
         [JumpInstruction, PlusPlusInstruction],
         [2],
         [
-            JumpInstruction.notation,
-            PlusPlusInstruction.notation,
-            PlusPlusInstruction.notation,
+            JumpInstruction.id,
+            PlusPlusInstruction.id,
+            PlusPlusInstruction.id,
         ],
     ) == [2]
 
@@ -37,7 +37,7 @@ def test_jump_oob_below(execute_multiple_instructions):
             [JumpInstruction],
             [-5],
             [
-                JumpInstruction.notation,
+                JumpInstruction.id,
             ],
         )
 
@@ -48,6 +48,6 @@ def test_jump_oob_above(execute_multiple_instructions):
             [JumpInstruction],
             [2],
             [
-                JumpInstruction.notation,
+                JumpInstruction.id,
             ],
         )

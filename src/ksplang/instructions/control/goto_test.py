@@ -9,9 +9,9 @@ from .goto import GotoInstruction
 def test_goto_set_ip(execute_multiple_instructions):
     ex = Executor(
         [
-            GotoInstruction.notation,
-            PlusPlusInstruction.notation,
-            PlusPlusInstruction.notation,
+            GotoInstruction.id,
+            PlusPlusInstruction.id,
+            PlusPlusInstruction.id,
         ],
         [2, 2],
         [GotoInstruction, PlusPlusInstruction],
@@ -30,7 +30,7 @@ def test_goto_set_ip(execute_multiple_instructions):
 def test_goto_low(execute_multiple_instructions):
     ex = Executor(
         [
-            GotoInstruction.notation,
+            GotoInstruction.id,
         ],
         [-1],
         [GotoInstruction],
@@ -42,7 +42,7 @@ def test_goto_low(execute_multiple_instructions):
 def test_goto_high(execute_multiple_instructions):
     ex = Executor(
         [
-            GotoInstruction.notation,
+            GotoInstruction.id,
         ],
         [1],
         [GotoInstruction],

@@ -1,6 +1,10 @@
 import sys
 
-from ksplang.execute import discover_instructions, execute_program
+from ksplang.execute import (
+    discover_instructions,
+    execute_program,
+    instruction_notation_to_ids,
+)
 
 
 def main():
@@ -22,7 +26,9 @@ def main():
 
     available_instructions = discover_instructions()
 
-    result = execute_program(instructions, stack, available_instructions)
+    result = execute_program(
+        instruction_notation_to_ids(instructions), stack, available_instructions
+    )
 
     print(" ".join(str(x) for x in result))
 

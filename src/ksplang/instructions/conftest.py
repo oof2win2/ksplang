@@ -9,7 +9,7 @@ from ksplang.instructions.base_instruction import BaseInstruction
 def execute_instruction(
     instruction_cls: type[BaseInstruction], stack: list[int]
 ) -> list[int]:
-    ex = Executor([instruction_cls.notation], stack, [instruction_cls])
+    ex = Executor([instruction_cls.id], stack, [instruction_cls])
     ex.execute_program()
     return ex.get_stack()
 
@@ -17,7 +17,7 @@ def execute_instruction(
 def execute_multiple(
     available: Sequence[type[BaseInstruction]],
     stack: list[int],
-    instructions: list[str],
+    instructions: list[int],
 ) -> list[int]:
     ex = Executor(instructions, stack, available)
     ex.execute_program()

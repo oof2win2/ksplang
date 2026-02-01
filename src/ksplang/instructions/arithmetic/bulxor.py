@@ -3,6 +3,7 @@ from ksplang.instructions.base_instruction import BaseInstruction
 
 
 class BulxorInstruction(BaseInstruction):
+    id = 25
     notation = "bulkxor"
 
     @staticmethod

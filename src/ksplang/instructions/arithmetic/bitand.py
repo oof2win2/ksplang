@@ -4,6 +4,7 @@ from ksplang.instructions.base_instruction import BaseInstruction
 
 
 class AndInstruction(BaseInstruction):
+    id = 19
     notation = "And"
 
     @staticmethod

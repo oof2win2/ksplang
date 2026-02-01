@@ -4,6 +4,7 @@ from ksplang.instructions.base_instruction import BaseInstruction
 
 
 class ReverseInstruction(BaseInstruction):
+    id = 30
     notation = "rev"
 
     @staticmethod

@@ -19,6 +19,7 @@ def bitshift(num: int, numshifts: int):
 
 
 class BitshiftInstruction(BaseInstruction):
+    id = 18
     notation = "bitshift"
 
     @staticmethod

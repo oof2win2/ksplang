@@ -14,10 +14,10 @@ def test_rev_docs(execute_multiple_instructions):
         [ReverseInstruction, PlusPlusInstruction, PopInstruction],
         [1, 2, 3, 4, 2, 0],
         [
-            ReverseInstruction.notation,
-            PlusPlusInstruction.notation,
-            PopInstruction.notation,
-            PopInstruction.notation,
+            ReverseInstruction.id,
+            PlusPlusInstruction.id,
+            PopInstruction.id,
+            PopInstruction.id,
         ],
     ) == [3, 3]
 
@@ -28,8 +28,8 @@ def test_rev_one(execute_multiple_instructions):
         [ReverseInstruction, NopInstruction],
         [1, 2, 3, 4, 0, 0],
         [
-            ReverseInstruction.notation,
-            NopInstruction.notation,
+            ReverseInstruction.id,
+            NopInstruction.id,
         ],
     ) == [1, 2, 3, 4]
 
@@ -40,8 +40,8 @@ def test_rev_two(execute_multiple_instructions):
         [ReverseInstruction, NopInstruction],
         [1, 2, 3, 4, 0, 2, 1],
         [
-            ReverseInstruction.notation,
-            NopInstruction.notation,
+            ReverseInstruction.id,
+            NopInstruction.id,
         ],
     ) == [1, 2, 3, 4]
 
@@ -52,10 +52,10 @@ def test_rev_three(execute_multiple_instructions):
         [ReverseInstruction, NopInstruction, PopInstruction],
         [1, 2, 3, 4, 2, 0],
         [
-            ReverseInstruction.notation,
-            PopInstruction.notation,
-            PopInstruction.notation,
-            NopInstruction.notation,
+            ReverseInstruction.id,
+            PopInstruction.id,
+            PopInstruction.id,
+            NopInstruction.id,
         ],
     ) == [3, 4]
 
@@ -66,11 +66,11 @@ def test_rev_four(execute_multiple_instructions):
         [ReverseInstruction, NopInstruction, GotoInstruction],
         [0, 1, 2, 3, 2, 0],
         [
-            NopInstruction.notation,
-            ReverseInstruction.notation,
-            GotoInstruction.notation,
-            NopInstruction.notation,
-            NopInstruction.notation,
+            NopInstruction.id,
+            ReverseInstruction.id,
+            GotoInstruction.id,
+            NopInstruction.id,
+            NopInstruction.id,
         ],
     ) == [3, 2, 1, 0]
 
@@ -81,10 +81,10 @@ def test_rev_five(execute_multiple_instructions):
         [ReverseInstruction, NopInstruction, GotoInstruction],
         [0, 1, 2, 3, 1, 0],
         [
-            NopInstruction.notation,
-            ReverseInstruction.notation,
-            GotoInstruction.notation,
-            NopInstruction.notation,
+            NopInstruction.id,
+            ReverseInstruction.id,
+            GotoInstruction.id,
+            NopInstruction.id,
         ],
     ) == [3, 2, 1, 0]
 
@@ -95,12 +95,12 @@ def test_rev_nested_one(execute_multiple_instructions):
         [ReverseInstruction, NopInstruction, PopInstruction],
         [-1, 0, 2, -1, 10, 11, 12, -1, -1, 5, 0],
         [
-            ReverseInstruction.notation,
-            PopInstruction.notation,
-            PopInstruction.notation,
-            PopInstruction.notation,
-            ReverseInstruction.notation,
-            PopInstruction.notation,
-            NopInstruction.notation,
+            ReverseInstruction.id,
+            PopInstruction.id,
+            PopInstruction.id,
+            PopInstruction.id,
+            ReverseInstruction.id,
+            PopInstruction.id,
+            NopInstruction.id,
         ],
     ) == [10, 11, 12]

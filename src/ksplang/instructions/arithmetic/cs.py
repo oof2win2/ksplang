@@ -3,6 +3,7 @@ from ksplang.instructions.base_instruction import BaseInstruction
 
 
 class CSInstruction(BaseInstruction):
+    id = 16
     notation = "CS"
 
     @staticmethod

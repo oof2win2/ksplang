@@ -3,6 +3,7 @@ from ksplang.instructions.base_instruction import BaseInstruction
 
 
 class Pop2Instruction(BaseInstruction):
+    id = 2
     notation = "pop2"
 
     @staticmethod

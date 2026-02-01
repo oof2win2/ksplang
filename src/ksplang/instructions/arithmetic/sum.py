@@ -4,6 +4,7 @@ from ksplang.instructions.base_instruction import BaseInstruction
 
 
 class SumInstruction(BaseInstruction):
+    id = 20
     notation = "sum"
 
     @staticmethod

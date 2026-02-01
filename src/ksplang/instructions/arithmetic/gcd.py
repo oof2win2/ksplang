@@ -4,6 +4,7 @@ from ksplang.instructions.base_instruction import BaseInstruction
 
 
 class GCDInstruction(BaseInstruction):
+    id = 21
     notation = "gcd"
 
     @staticmethod

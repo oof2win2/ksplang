@@ -3,6 +3,7 @@ from ksplang.instructions.base_instruction import BaseInstruction
 
 
 class CallInstruction(BaseInstruction):
+    id = 27
     notation = "call"
 
     @staticmethod

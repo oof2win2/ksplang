@@ -6,6 +6,7 @@ if TYPE_CHECKING:
 
 
 class BaseInstruction:
+    id: ClassVar[int]
     notation: ClassVar[str]
 
     @staticmethod

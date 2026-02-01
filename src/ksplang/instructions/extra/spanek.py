@@ -2,11 +2,10 @@ from ksplang.executor import Executor
 from ksplang.instructions.base_instruction import BaseInstruction
 
 
-class PopInstruction(BaseInstruction):
-    id = 1
-    notation = "pop"
+class SpanekInstruction(BaseInstruction):
+    id = 31
+    notation = "spanek"
 
     @staticmethod
     def execute(executor: Executor):
-        executor.stack_pop()
         return

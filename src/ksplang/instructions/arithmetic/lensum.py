@@ -3,6 +3,7 @@ from ksplang.instructions.base_instruction import BaseInstruction
 
 
 class LensumInstruction(BaseInstruction):
+    id = 17
     notation = "lensum"
 
     @staticmethod

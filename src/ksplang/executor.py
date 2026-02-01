@@ -6,9 +6,9 @@ from ksplang.instructions.base_instruction import BaseInstruction
 
 
 class Executor:
-    __instructions_to_execute: Sequence[str]
+    __instructions_to_execute: list[int]
     __stack: list[int]
-    __available_instructions: Sequence[type[BaseInstruction]]
+    __available_instructions: list[type[BaseInstruction]]
     __instruction_pointer: int
     __execution_direction: int
     __count_executed_instructions: int
@@ -16,13 +16,15 @@ class Executor:
 
     def __init__(
         self,
-        init_instructions: Sequence[str],
+        init_instructions: Sequence[int],
         init_stack: list[int],
         available_instructions: Sequence[type[BaseInstruction]],
     ):
-        self.__instructions_to_execute = [x.lower() for x in init_instructions]
+        self.__instructions_to_execute = init_instructions
         self.__stack = init_stack
-        self.__available_instructions = available_instructions
+        self.__available_instructions = [None] * 50
+        for ins in available_instructions:
+            self.__available_instructions[ins.id] = ins
         self.__instruction_pointer = 0
         self.__execution_direction = 1
         self.__count_executed_instructions = 0
@@ -183,22 +185,17 @@ class Executor:
                 self.__rev_stack.pop()  # close the block
                 continue
 
-            instruction = self.__instructions_to_execute[self.__instruction_pointer]
+            instruction_id = self.__instructions_to_execute[self.__instruction_pointer]
             # print(
             #     f"Executing IP={self.__instruction_pointer}, instruction={instruction}, stack={self.__stack}"
             # )
-            ex = next(
-                (
-                    ins
-                    for ins in self.__available_instructions
-                    if ins.notation.lower() == instruction
-                ),
-                None,
-            )
+            ex = self.__available_instructions[instruction_id]
             if not ex:
-                raise ValueError(f"Unknown instruction: {instruction}")
+                raise ValueError(f"Unknown instruction: {instruction_id}")
             ex.execute(self)
-            debug(f"Executed instruction {instruction} with new stack {self.__stack}")
+            debug(
+                f"Executed instruction {instruction_id} with new stack {self.__stack}"
+            )
             self.__instruction_pointer += 1 * self.__execution_direction
             self.__count_executed_instructions += 1
 
@@ -221,22 +218,15 @@ class Executor:
             self.set_instruction_pointer(self.__rev_stack[-1][1])
             self.__rev_stack.pop()  # close the block
 
-        instruction = self.__instructions_to_execute[self.__instruction_pointer]
+        instruction_id = self.__instructions_to_execute[self.__instruction_pointer]
         # print(
         #     f"Executing IP={self.__instruction_pointer}, instruction={instruction}, stack={self.__stack}"
         # )
-        ex = next(
-            (
-                ins
-                for ins in self.__available_instructions
-                if ins.notation.lower() == instruction
-            ),
-            None,
-        )
+        ex = self.__available_instructions[instruction_id]
         if not ex:
-            raise ValueError(f"Unknown instruction: {instruction}")
+            raise ValueError(f"Unknown instruction: {instruction_id}")
         ex.execute(self)
-        debug(f"Executed instruction {instruction} with new stack {self.__stack}")
+        debug(f"Executed instruction {instruction_id} with new stack {self.__stack}")
         self.__instruction_pointer += 1 * self.__execution_direction
         self.__count_executed_instructions += 1
         return 0

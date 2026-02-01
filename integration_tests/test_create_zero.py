@@ -1,4 +1,4 @@
-from ksplang.execute import discover_instructions
+from ksplang.execute import discover_instructions, instruction_notation_to_ids
 from ksplang.executor import Executor
 
 available_instructions = discover_instructions()
@@ -13,7 +13,7 @@ def test_create_zero_one():
     endstack.append(0)
 
     executor = Executor(
-        "CS CS CS ++ CS CS % pop2 pop2 pop2".split(" "),
+        instruction_notation_to_ids("CS CS CS ++ CS CS % pop2 pop2 pop2".split(" ")),
         startstack,
         available_instructions,
     )
@@ -28,7 +28,7 @@ def test_create_zero_two():
     endstack.append(0)
 
     executor = Executor(
-        "CS CS CS CS funkcia pop2 pop2".split(" "),
+        instruction_notation_to_ids("CS CS CS ++ CS CS % pop2 pop2 pop2".split(" ")),
         startstack,
         available_instructions,
     )
@@ -43,7 +43,9 @@ def test_create_zero_three():
     endstack.append(0)
 
     executor = Executor(
-        "CS CS lensum ++ CS %".split(" "), startstack, available_instructions
+        instruction_notation_to_ids("CS CS lensum ++ CS %".split(" ")),
+        startstack,
+        available_instructions,
     )
     executor.execute_program()
     result = executor.get_stack()
@@ -58,7 +60,9 @@ def test_create_zero_four():
     endstack.append(0)
 
     executor = Executor(
-        "CS CS lensum CS funkcia".split(" "), startstack, available_instructions
+        instruction_notation_to_ids("CS CS lensum CS funkcia".split(" ")),
+        startstack,
+        available_instructions,
     )
     executor.execute_program()
     result = executor.get_stack()
@@ -77,7 +81,7 @@ def test_create_zero_five():
     )
 
     executor = Executor(
-        instructions,
+        instruction_notation_to_ids(instructions),
         startstack,
         available_instructions,
     )

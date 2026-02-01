@@ -3,6 +3,7 @@ from ksplang.instructions.base_instruction import BaseInstruction
 
 
 class PraiseInstruction(BaseInstruction):
+    id = 0
     notation = "praise"
 
     @staticmethod

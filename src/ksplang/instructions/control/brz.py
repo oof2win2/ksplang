@@ -3,6 +3,7 @@ from ksplang.instructions.base_instruction import BaseInstruction
 
 
 class BrzInstruction(BaseInstruction):
+    id = 26
     notation = "brz"
 
     @staticmethod

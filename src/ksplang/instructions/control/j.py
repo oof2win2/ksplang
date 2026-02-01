@@ -3,6 +3,7 @@ from ksplang.instructions.base_instruction import BaseInstruction
 
 
 class JumpInstruction(BaseInstruction):
+    id = 29
     notation = "j"
 
     @staticmethod

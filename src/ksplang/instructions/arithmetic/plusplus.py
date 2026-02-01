@@ -3,6 +3,7 @@ from ksplang.instructions.base_instruction import BaseInstruction
 
 
 class PlusPlusInstruction(BaseInstruction):
+    id = 9
     notation = "++"
 
     @staticmethod

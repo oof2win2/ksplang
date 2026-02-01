@@ -39,8 +39,19 @@ def discover_instructions() -> Sequence[type[BaseInstruction]]:
     return instructions
 
 
+def instruction_notation_to_ids(labels: Sequence[str]) -> Sequence[int]:
+    ids = []
+    instructions = discover_instructions()
+    for label in labels:
+        for instruction in instructions:
+            if instruction.notation.lower() == label.lower():
+                ids.append(instruction.id)
+                break
+    return ids
+
+
 def execute_program(
-    init_instructions: Sequence[str],
+    init_instructions: Sequence[int],
     init_stack: list[int],
     # sequence means all available instructions must extend from BaseInstruction
     available_instructions: Sequence[type[BaseInstruction]],

@@ -1,7 +1,7 @@
 from random import randint, random
 
 from ksplang.constants import MAX_INT, MIN_INT
-from ksplang.execute import discover_instructions
+from ksplang.execute import discover_instructions, instruction_notation_to_ids
 from ksplang.executor import Executor
 
 available_instructions = discover_instructions()
@@ -21,7 +21,7 @@ def test_sort():
     endstack.append(len(startstack))
 
     executor = Executor(
-        instructions.split(" "),
+        instruction_notation_to_ids(instructions.split(" ")),
         startstack,
         available_instructions,
     )

@@ -3,6 +3,7 @@ from ksplang.instructions.base_instruction import BaseInstruction
 
 
 class NopInstruction(BaseInstruction):
+    id = -1
     """
     No operation instruction.
     For testing purposes only.

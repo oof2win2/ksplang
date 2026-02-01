@@ -7,6 +7,7 @@ pidigits = "31415926535897932384626433832795028841971693993751"
 
 
 class KPIInstruction(BaseInstruction):
+    id = 8
     notation = "kPi"
 
     @staticmethod

@@ -5,6 +5,7 @@ from ...constants import MAX_STACK_SIZE, MIN_INT
 
 
 class FFInstruction(BaseInstruction):
+    id = 6
     notation = "-ff"
 
     @staticmethod

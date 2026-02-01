@@ -1,4 +1,4 @@
-from ksplang.execute import discover_instructions
+from ksplang.execute import discover_instructions, instruction_notation_to_ids
 from ksplang.executor import Executor
 
 available_instructions = discover_instructions()
@@ -12,7 +12,9 @@ def test_negate_one():
     endstack = [-5]
 
     executor = Executor(
-        "CS CS lensum CS funkcia ++ CS CS % qeq".split(" "),
+        instruction_notation_to_ids(
+            "CS CS lensum CS funkcia ++ CS CS % qeq".split(" ")
+        ),
         startstack,
         available_instructions,
     )

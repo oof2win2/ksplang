@@ -9,9 +9,9 @@ from .brz import BrzInstruction
 def test_brz_set_ip(execute_multiple_instructions):
     ex = Executor(
         [
-            BrzInstruction.notation,
-            PlusPlusInstruction.notation,
-            PlusPlusInstruction.notation,
+            BrzInstruction.id,
+            PlusPlusInstruction.id,
+            PlusPlusInstruction.id,
         ],
         [2, 0],
         [BrzInstruction, PlusPlusInstruction],
@@ -29,7 +29,7 @@ def test_brz_set_ip(execute_multiple_instructions):
 def test_brz_ignore(execute_multiple_instructions):
     ex = Executor(
         [
-            BrzInstruction.notation,
+            BrzInstruction.id,
         ],
         [0, 1],
         [BrzInstruction],
@@ -44,9 +44,9 @@ def test_brz_ignore(execute_multiple_instructions):
 def test_brz_infinite_loop(execute_multiple_instructions):
     ex = Executor(
         [
-            BrzInstruction.notation,
-            PlusPlusInstruction.notation,
-            PlusPlusInstruction.notation,
+            BrzInstruction.id,
+            PlusPlusInstruction.id,
+            PlusPlusInstruction.id,
         ],
         [0, 0],
         [BrzInstruction, PlusPlusInstruction],
@@ -65,7 +65,7 @@ def test_brz_infinite_loop(execute_multiple_instructions):
 def test_brz_low(execute_multiple_instructions):
     ex = Executor(
         [
-            BrzInstruction.notation,
+            BrzInstruction.id,
         ],
         [-1, 0],
         [BrzInstruction],
@@ -77,7 +77,7 @@ def test_brz_low(execute_multiple_instructions):
 def test_brz_high(execute_multiple_instructions):
     ex = Executor(
         [
-            BrzInstruction.notation,
+            BrzInstruction.id,
         ],
         [1, 0],
         [BrzInstruction],

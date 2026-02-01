@@ -3,6 +3,7 @@ from ksplang.instructions.base_instruction import BaseInstruction
 
 
 class MaxInstruction(BaseInstruction):
+    id = 3
     notation = "max"
 
     @staticmethod

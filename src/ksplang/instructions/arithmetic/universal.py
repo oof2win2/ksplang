@@ -5,6 +5,7 @@ from ksplang.instructions.base_instruction import BaseInstruction
 
 
 class UniversalMathInstruction(BaseInstruction):
+    id = 10
     notation = "u"
 
     @staticmethod

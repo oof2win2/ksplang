@@ -8,7 +8,7 @@ def test_lswap_swaps_first_and_last(execute_single_instruction):
 
 
 def test_lswap_twice_returns_original(execute_multiple_instructions):
-    instructions = [LSwapInstruction.notation, LSwapInstruction.notation]
+    instructions = [LSwapInstruction.id, LSwapInstruction.id]
     stack = [1, 2, 3, 4]
     assert (
         execute_multiple_instructions([LSwapInstruction], stack, instructions) == stack
