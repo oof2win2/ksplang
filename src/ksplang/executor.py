@@ -55,8 +55,8 @@ class Executor:
         @raises ValueError if the value is not a 64-bit integer
         """
 
-        # if not is_int64(value):
-        #     raise ValueError("Value is not a 64-bit integer")
+        if not is_int64(value):
+            raise ValueError("Value is not a 64-bit integer")
 
         self.__stack.append(value)
 
@@ -75,8 +75,8 @@ class Executor:
         @raises ValueError if the value is not a 64-bit integer
         """
 
-        # if not is_int64(value):
-        #     raise ValueError("Value is not a 64-bit integer")
+        if not is_int64(value):
+            raise ValueError("Value is not a 64-bit integer")
 
         self.__stack[index] = value
 
@@ -93,8 +93,8 @@ class Executor:
         @raises ValueError if any value is not a 64-bit integer
         """
 
-        # if not all(is_int64(value) for value in values):
-        #     raise ValueError("One or more values are not 64-bit integers")
+        if not all(is_int64(value) for value in values):
+            raise ValueError("One or more values are not 64-bit integers")
 
         self.__stack.extend(values)
 

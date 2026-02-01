@@ -1,5 +1,8 @@
+from ksplang.constants import MAX_INT, MIN_INT
+
+
 def is_int64(value: int):
-    return -9223372036854775808 <= value <= 9223372036854775807
+    return MIN_INT <= value <= MAX_INT
 
 
 # wrap a python value to int64 and preserve the sign

@@ -1,4 +1,5 @@
 import pytest
+
 from ...constants import MAX_STACK_SIZE, MIN_INT
 from .ff import FFInstruction
 
