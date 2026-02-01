@@ -12,6 +12,7 @@ class Executor:
     __instruction_pointer: int
     __execution_direction: int
     __count_executed_instructions: int
+    __rev_stack: list[dict[str, int]]
 
     def __init__(
         self,
@@ -25,6 +26,7 @@ class Executor:
         self.__instruction_pointer = 0
         self.__execution_direction = 1
         self.__count_executed_instructions = 0
+        self.__rev_stack = []
 
     def stack_len(self) -> int:
         return len(self.__stack)
@@ -36,6 +38,14 @@ class Executor:
         """
 
         return self.__stack.pop(index)
+
+    def stack_peek(self, index: int = -1) -> int:
+        """
+        Peeks at a value from the stack.
+        @raises IndexError if the stack is empty
+        """
+
+        return self.__stack[index]
 
     def stack_push(self, value: int) -> None:
         """
@@ -86,6 +96,12 @@ class Executor:
 
         self.__stack.extend(values)
 
+    def stack_reverse(self) -> None:
+        """
+        Reverses the stack.
+        """
+        self.__stack.reverse()
+
     def get_stack(self) -> list[int]:
         """
         Returns a copy of the current stack.
@@ -128,12 +144,33 @@ class Executor:
         """
         return self.__count_executed_instructions
 
+    def peek_rev_stack(self) -> dict[str, int] | None:
+        """
+        Returns the rev stack.
+        """
+        return self.__rev_stack[-1] if len(self.__rev_stack) > 0 else None
+
+    def append_rev_stack(self, rev: dict[str, int]):
+        """
+        Appends a rev to the rev stack.
+        """
+        self.__rev_stack.append(rev)
+
+    def pop_rev_stack(self) -> dict[str, int]:
+        """
+        Pops a rev from the rev stack.
+        """
+        return self.__rev_stack.pop()
+
     def execute_program(self):
         """
         Executes the program.
         """
 
-        while self.__instruction_pointer < len(self.__instructions_to_execute):
+        while (
+            self.__instruction_pointer < len(self.__instructions_to_execute)
+            and self.__instruction_pointer > -1
+        ):
             instruction = self.__instructions_to_execute[self.__instruction_pointer]
             ex = next(
                 (
@@ -156,6 +193,8 @@ class Executor:
         """
 
         if self.__instruction_pointer >= len(self.__instructions_to_execute):
+            return 1
+        if self.__instruction_pointer == -1:
             return 1
 
         instruction = self.__instructions_to_execute[self.__instruction_pointer]

@@ -1,6 +1,5 @@
 import pytest
 
-from ksplang.executor import Executor
 from ksplang.instructions.arithmetic.plusplus import PlusPlusInstruction
 
 from .j import JumpInstruction

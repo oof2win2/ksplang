@@ -1,6 +1,7 @@
 from math import sqrt
 
 from ksplang.executor import Executor
+from ksplang.helpers.solve_quadratic_equation import solve_qeq
 from ksplang.instructions.base_instruction import BaseInstruction
 
 
@@ -13,42 +14,8 @@ class QuadraticSolutionInstruction(BaseInstruction):
         b = executor.stack_pop()
         c = executor.stack_pop()
 
-        if a == 0 and b == 0:
-            # c == 0 equation, infinite solutions
-            if c == 0:
-                raise ValueError("[qeq] The equation is indeterminate.")
-            # for c != 0, there are no solutions
-            return
+        sols = solve_qeq(a, b, c)
 
-        if a == 0:
-            # linear equation
-            sol = -c / b
-            if sol.is_integer():
-                executor.stack_push(int(sol))
-            return
-
-        discriminant = b**2 - 4 * a * c
-        if discriminant < 0:
-            # no real solutions
-            return
-        discrim_sqrt = sqrt(discriminant)
-
-        if discriminant == 0:
-            # one real solution
-            sol = -b / (2 * a)
-            if sol.is_integer():
-                executor.stack_push(int(sol))
-            return
-
-        sols = [
-            (-b + discrim_sqrt) / (2 * a),
-            (-b - discrim_sqrt) / (2 * a),
-        ]
-        sols.sort()
-        # if only one root, remove the duplicate
-        if sols[0] == sols[1]:
-            sols = [sols[0]]
         for sol in sols:
-            if sol.is_integer():
-                executor.stack_push(int(sol))
+            executor.stack_push(int(sol))
         return

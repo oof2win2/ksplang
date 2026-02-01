@@ -1,30 +1,51 @@
 import pytest
+from _pytest.runner import CallInfo
 
 from ksplang.executor import Executor
 from ksplang.instructions.arithmetic.plusplus import PlusPlusInstruction
+from ksplang.instructions.extra.nop import NopInstruction
 
 from .call import CallInstruction
 
 
-def test_brz_set_ip(execute_multiple_instructions):
-    ex = Executor(
-        [
-            CallInstruction.notation,
-            PlusPlusInstruction.notation,
-            PlusPlusInstruction.notation,
-        ],
-        [2, 2],
-        [CallInstruction, PlusPlusInstruction],
-    )
-    ex.execute_program()
-    # the stack should have only one PlusPlus executed on it
-    # 2 should stay, but it should append IP+1 and increment that => 4
-    assert ex.get_stack() == [2, 4]
-    # the IP should be set to 3, the last ++ instruction
-    assert ex.get_instruction_pointer() == 3
-    # the number of executed instructions should be 2
-    # one BRZ and one ++
-    assert ex.get_executed_instructions_count() == 2
+def test_call_one(execute_multiple_instructions):
+    instructions = [
+        CallInstruction.notation,
+        NopInstruction.notation,
+        NopInstruction.notation,
+        NopInstruction.notation,
+        NopInstruction.notation,
+    ]
+    assert execute_multiple_instructions(
+        [NopInstruction, CallInstruction], [1, 2, 3, 4], instructions
+    ) == [1, 2, 3, 4, 1]
+
+
+def test_call_two(execute_multiple_instructions):
+    instructions = [
+        NopInstruction.notation,
+        CallInstruction.notation,
+        NopInstruction.notation,
+        NopInstruction.notation,
+        NopInstruction.notation,
+    ]
+    assert execute_multiple_instructions(
+        [NopInstruction, CallInstruction], [1, 2, 3], instructions
+    ) == [1, 2, 3, 2]
+
+
+def test_call_three(execute_multiple_instructions):
+    instructions = [
+        NopInstruction.notation,
+        NopInstruction.notation,
+        NopInstruction.notation,
+        NopInstruction.notation,
+        CallInstruction.notation,
+        NopInstruction.notation,
+    ]
+    assert execute_multiple_instructions(
+        [NopInstruction, CallInstruction], [1, 2, 3], instructions
+    ) == [1, 2, 3, 5, 5]
 
 
 def test_call_low(execute_multiple_instructions):

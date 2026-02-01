@@ -7,7 +7,7 @@ class GotoInstruction(BaseInstruction):
 
     @staticmethod
     def execute(executor: Executor):
-        ip = executor.stack_pop()
+        ip = executor.stack_peek()
 
         if ip < 0:
             raise ValueError("Jump address must be non-negative")
@@ -15,6 +15,7 @@ class GotoInstruction(BaseInstruction):
             raise ValueError("Jump address must be within program bounds")
 
         # the Executor will auto-increment the IP after executing the instruction
-        executor.set_instruction_pointer(ip - 1)
+        executor.set_instruction_pointer(ip - 1 * executor.get_execution_direction())
+        print(f"set IP to {ip - 1 * executor.get_execution_direction()}")
 
         return
