@@ -1,7 +1,5 @@
 # Programmer documentation
 
-*Tady vysvětlete hlavní koncepty a strukturu vašeho programu. Pokud je váš program rozdělen do několika souborů, napište, k čemu každý soubor slouží a jakou funkcionalitu (třídy nebo funkce) v něm najdu. Pokud v programu používáte třídy, stručně popište význam těch nejdůležitějších (co mají za úkol).*
-
 ## Base Program Layout
 
 The interpreter itself is implemented in the `ksplang` package. It consists of several modules, each responsible for a specific aspect of the interpreter's functionality.
