@@ -1,21 +1,30 @@
 # Zápočtový program
 
-*Tento soubor vhodně upravte. Text psaný kurzívou označuje instrukce pro vás, před odevzdáním ho smažte.*
+The specification of this program is an interpreter for the [ksplang](https://ksp.mff.cuni.cz/h/ulohy/36/ksplang/) programming language. The purpose of this interpreter is a final assignment.
 
-## Specifikace
+## Specification
 
-*Sem napište stručnou specifikaci vašeho programu - co váš program dělá (podobně, jako jste mi psali do mailu). Stačí zhruba 1 odstavec.*
+The specification of the program is to implement all of the instructions within the `ksplang` programming language, such that all tests on the website (examples from the instructions) and the solutions of various challenges run correctly.
 
-## Instalace a spuštění
 
-*Pokud je váš program v Pythonu, stačí upravit JMENO_HLAVNIHO_SOUBORU níže a případně doplnit další informace ke spuštění (jestli má nějaké parametry, vstupní soubory, ...). Pokud je parametrů hodně nebo je potřeba nějaký speciální formát vstupních souborů, nechte tuto sekci jen stručnou a podrobněji to popište v uživatelské dokumentaci (a sem dejte odkaz). Pokud je program v jiném programovacím jazyce, tuto sekci vhodně upravte, abych byl při kontrole schopen nainstalovat si potřebné nástroje a program spustit.*
+## Installation
 
-Program se spustí příkazem: `python JMENO_HLAVNIHO_SOUBORU.py`
+Install dependencies with `uv sync`
 
-## Dokumentace
+Example usage:
+```
+uv run src/ksplang/main.py program.ksplang < input.txt
+# input.txt
+41 12
+# program.ksplang
+pop ++
+```
 
-*Tady bude rozcestník k dokumentaci k vašemu programu. Pokud je to potřeba, upravte odkazy na soubory s dokumentací. Nebo pokud nepíšete dokumentaci v Markdownu, tak sem napište, kde dokumentaci najdu.*
+See more examples in [examples.md](docs/examples.md)
 
-* [Uživatelská dokumentace](docs/user.md)
-* [Ukázky použití](docs/examples.md)
-* [Programátorská dokumentace](docs/programmer.md)
+
+## Documentation
+
+* [User documentation](docs/user.md)
+* [Examples](docs/examples.md)
+* [Programmer documentation](docs/programmer.md)
